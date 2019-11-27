@@ -13,6 +13,7 @@ import ProductCategoryList from "./product/ProdCatList"
 // import PaymentOptions from "./payment/PaymentOptions"
 import MyCart from "./Order/CurrentOrder"
 import MyProducts from "./product/MyProduct"
+import ProductList from "./product/ProductList"
 
 
 const ApplicationViews = () => {
@@ -61,7 +62,7 @@ const ApplicationViews = () => {
             <Route
                 exact path="/types" render={props => {
                     return (
-                       <ProductCategories {...props} />
+                       <ProductList {...props} />
                     )
                 }}
             />

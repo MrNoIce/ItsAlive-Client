@@ -9,7 +9,7 @@ const HomePage = props => {
 
 
   const getTwentyProducts = () => {
-    fetch("http://localhost:8080/products?limit=20", {
+    fetch("http://localhost:8000/products?limit=20", {
       method: "GET",
       headers: {
         Accept: "application/json"
@@ -21,7 +21,7 @@ const HomePage = props => {
 
 
   const filterProductsCity = (city) => {
-    fetch(`http://localhost:8080/products?city=${city}`, {
+    fetch(`http://localhost:8000/products?city=${city}`, {
       method: "Get",
       headers: {
         Accept: "application/json"

@@ -23,7 +23,7 @@ const ProductForm = props => {
       description: description.current.value,
       quantity: parseInt(quantity.current.value),
       city: city.current.value.toLowerCase(),
-      producttype_id: parseInt(category_id.current.value),
+      // producttype_id: parseInt(category_id.current.value),
       product_image: ""
     };
     if (category_id.current.value === "") {
@@ -166,7 +166,7 @@ const ProductForm = props => {
               required
             />
           </fieldset>
-          <fieldset>
+          {/* <fieldset>
             <label htmlFor="category"> Category: </label>
             <select ref={category_id}>
               <option value="">Select Category</option>
@@ -174,7 +174,7 @@ const ProductForm = props => {
                 return <option key={category.id} value={category.id}>{category.name}</option>;
               })}
             </select>
-          </fieldset>
+          </fieldset> */}
           <fieldset>
             <button type="submit">Submit</button>
           </fieldset>
