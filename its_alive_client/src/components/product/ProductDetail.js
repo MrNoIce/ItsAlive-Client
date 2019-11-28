@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth"
+import Button from '@material-ui/core/Button';
+
 
 
 const ProductDetails = props => {
@@ -49,6 +51,9 @@ const ProductDetails = props => {
                             <h3>Product Description: {productDetail.description}</h3>
                             <h3>Price: ${productDetail.price}</h3>
                             <h3>Quantity Available: {totalAvailable} </h3>
+                            <Button variant="contained" color="primary">
+                            Material UI
+                            </Button>
                             {isAuthenticated() ?
                             <button className="fakeLink addToOrder__link"
                                 onClick={() => addToOrder(productDetail)}> Add to Order </button>
