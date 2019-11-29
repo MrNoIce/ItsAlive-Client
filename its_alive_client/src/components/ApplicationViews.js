@@ -7,10 +7,10 @@ import HomePage from "./home/HomePage"
 import ProductCategories from "./product/ProductCategories"
 import ProductDetail from "./product/ProductDetail"
 import ProductForm from "./product/ProductForm"
-// import PaymentForm from "./payment/PaymentForm"
+import PaymentForm from "./payment/PaymentForm"
 import Profile from "./payment/Profile"
 import ProductCategoryList from "./product/ProdCatList"
-// import PaymentOptions from "./payment/PaymentOptions"
+import PaymentOptions from "./payment/PaymentOptions"
 import MyCart from "./Order/CurrentOrder"
 import MyProducts from "./product/MyProduct"
 import ProductList from "./product/ProductList"
@@ -85,7 +85,7 @@ const ApplicationViews = () => {
             />
             <Route
                 path="/paymentform" render={props => {
-                    // return <PaymentForm {...props} />
+                    return <PaymentForm {...props} />
                 }}
             />
 
@@ -95,7 +95,7 @@ const ApplicationViews = () => {
             />
 
             <Route exact path="/paymentlist" render={props => {
-                // return <PaymentOptions {...props} />
+                return <PaymentOptions {...props} />
             }}
             />
             <Route exact path="/mycart" render={props => {
