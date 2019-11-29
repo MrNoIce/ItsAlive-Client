@@ -11,7 +11,7 @@ const PaymentOptions = props => {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": `Token ${localStorage.getItem("bangazon_token")}`,
+        "Authorization": `Token ${localStorage.getItem("itsalive_token")}`,
       }
     })
       .then(res => res.json())

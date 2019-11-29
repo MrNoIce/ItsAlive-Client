@@ -20,7 +20,7 @@ const PaymentForm = props => {
                 "headers": {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+                "Authorization": `Token ${localStorage.getItem("itsalive_token")}`
                 },
                 "body": JSON.stringify({
                 "merchant_name": merchant_name.current.value,
