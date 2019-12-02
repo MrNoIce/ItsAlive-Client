@@ -5,8 +5,6 @@ import ProductList from "../product/ProductList";
 
 const HomePage = props => {
   const [products, setProducts] = useState([]);
-  const search = useRef()
-
 
   const getTwentyProducts = () => {
     fetch("http://localhost:8000/products?limit=20", {
@@ -19,43 +17,12 @@ const HomePage = props => {
       .then(setProducts);
   }
 
-
-  const filterProductsCity = (city) => {
-    fetch(`http://localhost:8000/products?city=${city}`, {
-      method: "Get",
-      headers: {
-        Accept: "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(setProducts)
-  }
-
   useEffect(() => {
     getTwentyProducts()}, [])
-
-  const SubmitSearch = e => {
-    e.preventDefault()
-    filterProductsCity(search.current.value)
-
-  }
-
-  const refresh = (e) => {
-    e.preventDefault()
-    getTwentyProducts()
-  }
 
   return (
     <>
       <main className="explorer">
-        <label name="city">Search for a City</label>
-        <br></br>
-        <form onSubmit={SubmitSearch}>
-          <input placeholder="ex: Nashville" name="city" defaultValue="" ref={search} type="text">
-          </input>
-          <button type='submit'>Submit</button>
-        </form>
-          <a href="" onClick={refresh}>Reset</a>
         <h4><ProductList {...props} products={products} /></h4>
       </main>
     </>
