@@ -11,9 +11,9 @@ const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
+    // menuButton: {
+    //   marginRight: theme.spacing(2),
+    // },
     title: {
       flexGrow: 1,
     },
@@ -28,29 +28,30 @@ const NavBar = props => {
         <div className={classes.root}>
             <AppBar position="static">
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuItem component={Link} to='/'>Its Alive</MenuItem>
+                    <MenuItem component={Link} to='/'>Its Alive</MenuItem>
 
-                        {isAuthenticated() ?
-                        <MenuItem component={Link} to='/mysettings'>My account</MenuItem>
-                        : null
-                        }
-                        {isAuthenticated() ?
-                        <MenuItem component={Link} to='/mycart'>Cart</MenuItem>
-                        : null
-                        }
-                        { isAuthenticated() ?
-                        <MenuItem component={Link}  onClick={() => {
-                                     logout()
-                                     props.history.push({
-                                         pathname: "/"
-                                     })
-                                 }
-                                }>Logout</MenuItem>
-                        : <>
-                        <MenuItem component={Link} to='/login'>Login</MenuItem>
-                        <MenuItem component={Link} to='/register'>Register</MenuItem>
-                        </>
-                        }
+                    {isAuthenticated() ?
+                    <MenuItem component={Link} to='/mysettings'>My account</MenuItem>
+                    : null
+                    }
+                    {isAuthenticated() ?
+                    <MenuItem component={Link} to='/mycart'>Cart</MenuItem>
+                    : null
+                    }
+                    { isAuthenticated() ?
+                    <MenuItem component={Link}
+                        onClick={() => {
+                            logout()
+                                props.history.push({
+                                    pathname: "/"
+                                })
+                            }
+                        }>Logout</MenuItem>
+                    : <>
+                    <MenuItem component={Link} to='/login'>Login</MenuItem>
+                    <MenuItem component={Link} to='/register'>Register</MenuItem>
+                    </>
+                    }
                 </IconButton>
             </AppBar>
     </div>
