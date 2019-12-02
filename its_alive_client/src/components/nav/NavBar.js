@@ -12,9 +12,9 @@ const NavBar = props => {
                 <li className="nav-item">
                     <Link className="nav-link" to="/">ItsAlive</Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <Link className="nav-link" to="/types">Products</Link>
-                </li>
+                </li> */}
                 {isAuthenticated() ?
                 <li className="nav-item">
                     <Link className="nav-link" to="/mysettings">My Profile</Link>

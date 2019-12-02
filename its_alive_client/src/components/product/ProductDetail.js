@@ -31,7 +31,7 @@ const ProductDetails = props => {
                 headers :{
                     "Content-Type": "application/json",
                     "Accept": "application/json",
-                    "Authorization": `Token ${localStorage.getItem("itsalive_tokenx")}`,
+                    "Authorization": `Token ${localStorage.getItem("itsalive_token")}`,
                 },
                 body: JSON.stringify(newOrder)
             })
