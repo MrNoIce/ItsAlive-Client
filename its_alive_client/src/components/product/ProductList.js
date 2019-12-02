@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Product from "./Product"
+import ProductCard from "./ProductCard"
 
 
 
@@ -26,7 +27,7 @@ const ProductList = props => {
             <article className="productList">
                 {
                     products.map(product =>
-                        <Product key={product.id}
+                        <ProductCard key={product.id}
                             product={product} {...props} />)
                 }
             </article>

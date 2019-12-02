@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 
 const Product = props => {
@@ -11,14 +11,14 @@ const Product = props => {
 
             <div className="card-body">
               <section className="product">
-                  <Link className="nav-link" to={`/products/${props.product.id}`}>
-                      <h5>{props.product.name} nane</h5>
-                  </Link>
               </section>
               <p className="card-text">${props.product.price}</p>
-              <p className="card-text">Current Inventory: <b>{totalAvailable}</b> available</p>
+              <p className="card-text"><b>{totalAvailable}</b> available</p>
+                  <Link className="nav-link" to={`/products/${props.product.id}`}>
+                      <h5>{props.product.name}</h5>
+                  </Link>
               <Button variant="contained" color="primary">
-            Hello World
+            Get it
             </Button>
             </div>
 
