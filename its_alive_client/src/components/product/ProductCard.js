@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth"
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -13,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
-import { flexbox } from "@material-ui/system";
 import Grid from "@material-ui/core/Grid"
+import { ClickAwayListener } from "@material-ui/core";
 
 
 
@@ -52,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 const Product = props => {
     const { isAuthenticated } = useSimpleAuth()
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded, open, setOpen] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -75,14 +74,15 @@ const Product = props => {
             props.history.push("/")
         })
     }
+    // const handleClickAway = () => {
+    //     setOpen(false);
+    //   };
 
     const totalAvailable = props.product.quantity - props.product.total_sold
     return (
-        <div>
-
             <Grid spacing={3} justifyContent="space-around">
                 <Card className={classes.card} key={props.product.id}>
-                <CardActionArea>
+                    <CardActionArea>
                         <CardMedia
                             className={classes.media}
                             image={require("/Users/jakescott/workspace/ItsAlive/ItsAlive-Client/its_alive_client/src/static/images/kombuchaStock.jpg")}
@@ -102,41 +102,34 @@ const Product = props => {
                                     Order
                                 </Button>
                             : null
-                        }
+                            }
                         <IconButton
-                                className={clsx(classes.expand, {
-                                    [classes.expandOpen]: expanded,
-                                })}
-                                onClick={handleExpandClick}
-                                aria-expanded={expanded}
-                                aria-label="show more"
-                                >
-                                <ExpandMoreIcon />
+                            className={clsx(classes.expand, {
+                                [classes.expandOpen]: expanded,
+                            })}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                            >
+                            <ExpandMoreIcon />
                             </IconButton>
                         </CardActions>
-                        <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    </CardActionArea>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                        <ClickAwayListener onClickAway={handleExpandClick}>
                             <CardContent>
                                 <Typography paragraph>
                                     {props.product.description} -
                                     This kombooboo be hand crafted for sure
                                 </Typography>
                                 <Typography paragraph>
-                                    Ol Dudley makes this junk and its poppin. Its the best dang kombucha i done ever ever had
-                                </Typography>
-                                <Typography paragraph>
-                                    One drank and youll be hooked, its the truth for real
-                                </Typography>
-                                <Typography>
-                                    gone head and cop you some of this kombooboo
+                                    Ol Dudley makes this junk and its poppin. Its the best dang kombucha I done ever ever had
                                 </Typography>
                             </CardContent>
-                        </Collapse>
-                </CardActionArea>
-            </Card>
-        </Grid>
-        </div>
-
-
+                        </ClickAwayListener>
+                    </Collapse>
+                </Card>
+            </Grid>
     )
 }
 
