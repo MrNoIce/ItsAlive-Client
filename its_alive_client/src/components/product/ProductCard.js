@@ -10,37 +10,43 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
+import { flexbox } from "@material-ui/system";
+import Grid from "@material-ui/core/Grid"
 
 
 
 
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
+    container: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        gridGap: theme.spacing(3),
+        spacing: "auto",
+        },
+    card: {
+        maxWidth: 200,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
+        duration: theme.transitions.duration.shortest,
     }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+    control: {
+        padding: theme.spacing(2),
+      },
 }));
 
 const Product = props => {
@@ -72,63 +78,64 @@ const Product = props => {
 
     const totalAvailable = props.product.quantity - props.product.total_sold
     return (
+        <div>
 
-        <Card className={classes.card}>
-            <CardActionArea>
-                <div key={props.product.id} className="card-body">
-                    <CardMedia
-                        className={classes.media}
-                        image={require("/Users/jakescott/workspace/ItsAlive/ItsAlive-Client/its_alive_client/src/static/images/kombuchaStock.jpg")}
-                        title="Kombucha Stock Photo"
-                        style={useStyles.media}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            <Link className="nav-link" to={`/products/${props.product.id}`}>
-                                <h5>{props.product.name}</h5>
-                            </Link>
-                        </Typography>
-                        <p className="card-text">${props.product.price}</p>
-                    </CardContent>
-                    <CardActions>
-                        {isAuthenticated() ?
-                        <Button size='small' onClick={() => addToOrder(props.product)}
-                         color="primary">
-                            Get it
-                        </Button>
-                        : null
-                    }
-                    <IconButton
-                        className={clsx(classes.expand, {
-                            [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                        >
-                        <ExpandMoreIcon />
-                    </IconButton>
-                    </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Grid spacing={3} justifyContent="space-around">
+                <Card className={classes.card} key={props.product.id}>
+                <CardActionArea>
+                        <CardMedia
+                            className={classes.media}
+                            image={require("/Users/jakescott/workspace/ItsAlive/ItsAlive-Client/its_alive_client/src/static/images/kombuchaStock.jpg")}
+                            title="Kombucha Stock Photo"
+                            style={useStyles.media}
+                        />
                         <CardContent>
-                            <Typography paragraph>
-                                {props.product.description}
-                                This kombooboo be hand crafted for sure
+                            <Typography variant="body2" color="textPrimary" component="p">
+                                    {props.product.name}
                             </Typography>
-                            <Typography paragraph>
-                                Ol Dudley makes this junk and its poppin. Its the best dang kombucha i done ever ever had
-                            </Typography>
-                            <Typography paragraph>
-                                One drank and youll be hooked, its the truth for real
-                            </Typography>
-                            <Typography>
-                                gone head and cop you some of this kombooboo
-                            </Typography>
+                                    ${props.product.price}
                         </CardContent>
-                    </Collapse>
-                </div>
-            </CardActionArea>
-        </Card>
+                        <CardActions disableSpacing>
+                            {isAuthenticated() ?
+                                <Button onClick={() => addToOrder(props.product)}
+                                color="primary" size='small'>
+                                    Order
+                                </Button>
+                            : null
+                        }
+                        <IconButton
+                                className={clsx(classes.expand, {
+                                    [classes.expandOpen]: expanded,
+                                })}
+                                onClick={handleExpandClick}
+                                aria-expanded={expanded}
+                                aria-label="show more"
+                                >
+                                <ExpandMoreIcon />
+                            </IconButton>
+                        </CardActions>
+                        <Collapse in={expanded} timeout="auto" unmountOnExit>
+                            <CardContent>
+                                <Typography paragraph>
+                                    {props.product.description} -
+                                    This kombooboo be hand crafted for sure
+                                </Typography>
+                                <Typography paragraph>
+                                    Ol Dudley makes this junk and its poppin. Its the best dang kombucha i done ever ever had
+                                </Typography>
+                                <Typography paragraph>
+                                    One drank and youll be hooked, its the truth for real
+                                </Typography>
+                                <Typography>
+                                    gone head and cop you some of this kombooboo
+                                </Typography>
+                            </CardContent>
+                        </Collapse>
+                </CardActionArea>
+            </Card>
+        </Grid>
+        </div>
+
 
     )
 }
