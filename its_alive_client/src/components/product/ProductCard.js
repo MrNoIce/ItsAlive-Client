@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 const Product = props => {
     const { isAuthenticated } = useSimpleAuth()
     const classes = useStyles();
-    const [expanded, setExpanded, open, setOpen] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -74,10 +74,7 @@ const Product = props => {
             props.history.push("/")
         })
     }
-    // const handleClickAway = () => {
-    //     setOpen(false);
-    //   };
-
+    
     const totalAvailable = props.product.quantity - props.product.total_sold
     return (
             <Grid spacing={3} justifyContent="space-around">
