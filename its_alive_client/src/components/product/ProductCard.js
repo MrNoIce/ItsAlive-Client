@@ -3,6 +3,7 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth"
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,7 +14,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import Grid from "@material-ui/core/Grid"
-import { ClickAwayListener } from "@material-ui/core";
 
 
 
@@ -74,12 +74,11 @@ const Product = props => {
             props.history.push("/")
         })
     }
-    
+
     const totalAvailable = props.product.quantity - props.product.total_sold
     return (
             <Grid spacing={3} justifyContent="space-around">
                 <Card className={classes.card} key={props.product.id}>
-                    <CardActionArea>
                         <CardMedia
                             className={classes.media}
                             image={require("/Users/jakescott/workspace/ItsAlive/ItsAlive-Client/its_alive_client/src/static/images/kombuchaStock.jpg")}
@@ -107,11 +106,11 @@ const Product = props => {
                             onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"
+                            aria-controls="fade-menu"
                             >
                             <ExpandMoreIcon />
                             </IconButton>
                         </CardActions>
-                    </CardActionArea>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <ClickAwayListener onClickAway={handleExpandClick}>
                             <CardContent>
