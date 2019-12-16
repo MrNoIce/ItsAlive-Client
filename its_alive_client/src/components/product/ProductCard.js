@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -13,7 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
+import Fade from "@material-ui/core/Fade";
 
 
 
@@ -112,17 +112,19 @@ const Product = props => {
                             </IconButton>
                         </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <ClickAwayListener onClickAway={handleExpandClick}>
-                            <CardContent>
-                                <Typography paragraph>
-                                    {props.product.description} -
-                                    This kombooboo be hand crafted for sure
-                                </Typography>
-                                <Typography paragraph>
-                                    Ol Dudley makes this junk and its poppin. Its the best dang kombucha I done ever ever had
-                                </Typography>
-                            </CardContent>
-                        </ClickAwayListener>
+                        <Fade in={expanded} timeout="auto" unmountOnExit>
+                            <ClickAwayListener onClickAway={handleExpandClick}>
+                                <CardContent>
+                                    <Typography paragraph>
+                                        {props.product.description} -
+                                        This kombooboo be hand crafted for sure
+                                    </Typography>
+                                    <Typography paragraph>
+                                        Ol Dudley makes this junk and its poppin. Its the best dang kombucha I done ever ever had
+                                    </Typography>
+                                </CardContent>
+                            </ClickAwayListener>
+                        </Fade>
                     </Collapse>
                 </Card>
             </Grid>

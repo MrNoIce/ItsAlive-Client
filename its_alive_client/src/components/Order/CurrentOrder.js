@@ -99,6 +99,15 @@ const MyCart = props => {
     });
   };
 
+  //to add the quantity
+  const handleAddQuantity = (id)=>{
+    this.props.addQuantity(id);
+  }
+  //to substruct from the quantity
+  const handleSubtractQuantity = (id)=>{
+      this.props.subtractQuantity(id);
+  }
+
   useEffect(() => {
     getOpenOrder();
     getPaymentTypes();
