@@ -1,11 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from "@material-ui/core/Paper"
+import Button from '@material-ui/core/Button';
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
+
+
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(1, 1),
+  },
+}));
+
 
 const MyCart = props => {
   const [products, setProducts] = useState([]);
   const [paymenttypes, setPaymentTypes] = useState([]);
   const payment = useRef();
+  const classes = useStyles();
+
 
   const getOpenOrder = () => {
+
     fetch(`http://localhost:8000/orders/cart`, {
       method: "GET",
       headers: {
@@ -99,15 +115,6 @@ const MyCart = props => {
     });
   };
 
-  //to add the quantity
-  const handleAddQuantity = (id)=>{
-    this.props.addQuantity(id);
-  }
-  //to substruct from the quantity
-  const handleSubtractQuantity = (id)=>{
-      this.props.subtractQuantity(id);
-  }
-
   useEffect(() => {
     getOpenOrder();
     getPaymentTypes();
@@ -118,18 +125,19 @@ const MyCart = props => {
       <main className="order-items">
         <h2>My Cart</h2>
         <ul>
+
           {products.map(item => {
             return (
-              <li key={item.id}>
-                {item.name}: {item.price}
-                <button
+              <Paper className={classes.root} key={item.id}>
+                <Button
                   onClick={() => {
                     deleteItem(item.id);
-                  }}
+                  }} color="primary" size='small'
                 >
-                  remove
-                </button>
-              </li>
+                  <RemoveShoppingCartIcon />
+                </Button>
+                {item.name}: {item.price}
+              </Paper>
             );
           })}
         </ul>
