@@ -141,6 +141,7 @@ const MyCart = props => {
             );
           })}
         </ul>
+        <Paper className={classes.root}>
         <label htmlFor="paymenttypes"> Select a Payment: </label>
         <select ref={payment}>
           <option value="" >
@@ -161,6 +162,7 @@ const MyCart = props => {
         </button>
         <br></br>
         <button onClick={cancelOrder}>Cancel Order</button>
+        </Paper>
       </main>
     </>
   );
