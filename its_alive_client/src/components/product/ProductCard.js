@@ -119,9 +119,6 @@ const Product = props => {
                                         {props.product.description} -
                                         This kombooboo be hand crafted for sure
                                     </Typography>
-                                    <Typography paragraph>
-                                        Ol Dudley makes this junk and its poppin. Its the best dang kombucha I done ever ever had
-                                    </Typography>
                                 </CardContent>
                             </ClickAwayListener>
                         </Fade>

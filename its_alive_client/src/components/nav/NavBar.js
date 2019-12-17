@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
     // menuButton: {
     //   marginRight: theme.spacing(2),
     // },
+    media: {
+        width: '45%',
+        height: '45%',
+    },
     title: {
       flexGrow: 1,
     },
@@ -26,6 +30,17 @@ const NavBar = props => {
 
 
     return (
+        <>
+        <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+            <img src={require("/Users/jakescott/workspace/ItsAlive/ItsAlive-Client/its_alive_client/src/static/images/kombuchaStock.jpg")}
+                className={classes.media}
+                style={useStyles.media}
+                title="Kombucha Stock Photo"
+                /></div>
         <div className={classes.root}>
             <AppBar position="static">
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -56,6 +71,7 @@ const NavBar = props => {
                 </IconButton>
             </AppBar>
     </div>
+    </>
     )
 }
 
