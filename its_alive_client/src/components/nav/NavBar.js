@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu';
+import Fade from '@material-ui/core/Fade';
+import MenuIcon from '@material-ui/icons/Menu'
 import './navbar.css'
 
 
@@ -19,6 +22,9 @@ const useStyles = makeStyles(theme => ({
         width: '45%',
         height: '45%',
     },
+    style: {
+        background : '#2E3B55',
+    },
     title: {
       flexGrow: 1,
     },
@@ -26,12 +32,23 @@ const useStyles = makeStyles(theme => ({
 
 const NavBar = props => {
     const { isAuthenticated, logout } = useSimpleAuth()
+    const [anchorEl, setAnchorEl] = React.useState(null)
     const classes = useStyles();
+    const open = Boolean(anchorEl);
+
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = event => {
+        setAnchorEl(null);
+    };
 
 
     return (
         <>
-        <div style={{
+        {/* <div style={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -40,22 +57,44 @@ const NavBar = props => {
                 className={classes.media}
                 style={useStyles.media}
                 title="Kombucha Stock Photo"
-                /></div>
+                /></div> */}
         <div className={classes.root}>
-            <AppBar position="static">
+
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuItem component={Link} to='/'>Its Alive</MenuItem>
+                <MenuIcon
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                    aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}
+                >
+                </MenuIcon>
+                </IconButton>
+
+                <AppBar position="static"
+                    className={classes.style}
+                >
+                    <Menu
+                    id="fade-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    TransitionComponent={Fade}
+                  >
+
+                    <MenuItem onClick={handleClose} component={Link} to='/'>Its Alive</MenuItem>
 
                     {isAuthenticated() ?
-                    <MenuItem component={Link} to='/mysettings'>My account</MenuItem>
+                    <MenuItem onClick={handleClose} component={Link} to='/mysettings'>My account</MenuItem>
                     : null
                     }
                     {isAuthenticated() ?
-                    <MenuItem component={Link} to='/mycart'>Cart</MenuItem>
+                    <MenuItem onCick={handleClose} component={Link} to='/mycart'>Cart</MenuItem>
                     : null
                     }
                     { isAuthenticated() ?
-                    <MenuItem component={Link}
+                    <MenuItem onClick={handleClose} component={Link}
                         onClick={() => {
                             logout()
                                 props.history.push({
@@ -64,11 +103,12 @@ const NavBar = props => {
                             }
                         }>Logout</MenuItem>
                     : <>
-                    <MenuItem component={Link} to='/login'>Login</MenuItem>
-                    <MenuItem component={Link} to='/register'>Register</MenuItem>
+                    <MenuItem onClick={handleClose} component={Link} to='/login'>Login</MenuItem>
+                    <MenuItem onClick={handleClose} component={Link} to='/register'>Register</MenuItem>
                     </>
                     }
-                </IconButton>
+                    </Menu>
+
             </AppBar>
     </div>
     </>

@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 import Grid from "@material-ui/core/Grid";
 import Fade from "@material-ui/core/Fade";
 
@@ -36,9 +38,9 @@ const useStyles = makeStyles(theme => ({
     expand: {
         transform: 'rotate(0deg)',
         marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-    }),
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
     },
     expandOpen: {
         transform: 'rotate(180deg)',
@@ -48,14 +50,29 @@ const useStyles = makeStyles(theme => ({
       },
 }));
 
+function transitionDown(props) {
+    return<Slide {...props} direction="down" />;
+}
+
 const Product = props => {
     const { isAuthenticated } = useSimpleAuth()
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
     const [expanded, setExpanded] = React.useState(false);
+    const [transition, setTransition] = React.useState(undefined);
+
+
+    const handleOrderClick = transition => () => {
+        setTransition(() => transition);
+        setOpen(true);
+    }
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    const handleClose = () => {
+        setOpen(false);
+    }
 
 
 
@@ -73,6 +90,7 @@ const Product = props => {
         .then(() => {
             props.history.push("/")
         })
+        handleOrderClick(transitionDown)
     }
 
     const totalAvailable = props.product.quantity - props.product.total_sold
@@ -108,7 +126,7 @@ const Product = props => {
                             aria-label="show more"
                             aria-controls="fade-menu"
                             >
-                            <ExpandMoreIcon />
+                                <ExpandMoreIcon />
                             </IconButton>
                         </CardActions>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -124,7 +142,17 @@ const Product = props => {
                         </Fade>
                     </Collapse>
                 </Card>
-            </Grid>
+            <Snackbar
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={transition}
+                autoHideDuration={900}
+                ContentProps={{
+                    'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">"Product added to cart"</span>}
+            />
+        </Grid>
     )
 }
 
