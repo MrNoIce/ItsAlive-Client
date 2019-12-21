@@ -62,10 +62,6 @@ const Product = props => {
     const [transition, setTransition] = React.useState(undefined);
 
 
-    const handleOrderClick = transition => () => {
-        setTransition(() => transition);
-        setOpen(true);
-    }
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -75,6 +71,10 @@ const Product = props => {
     }
 
 
+    const handleOrderClick = transition => {
+        setTransition(() => transition);
+        setOpen(true);
+    }
 
     const addToOrder = (newOrder) => {
         fetch(`http://localhost:8000/orders`, {
@@ -90,7 +90,6 @@ const Product = props => {
         .then(() => {
             props.history.push("/")
         })
-        handleOrderClick(transitionDown)
     }
 
     const totalAvailable = props.product.quantity - props.product.total_sold
@@ -111,8 +110,13 @@ const Product = props => {
                         </CardContent>
                         <CardActions disableSpacing>
                             {isAuthenticated() ?
-                                <Button onClick={() => addToOrder(props.product)}
-                                color="primary" size='small'>
+                                <Button
+                                color="primary"
+                                size='small'
+                                onClick={() => {
+                                    addToOrder(props.product);
+                                    handleOrderClick(transitionDown);}}
+                                >
                                     Order
                                 </Button>
                             : null
