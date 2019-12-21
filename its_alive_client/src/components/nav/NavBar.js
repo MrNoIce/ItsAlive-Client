@@ -92,7 +92,7 @@ const NavBar = props => {
                     : null
                     }
                     {isAuthenticated() ?
-                    <MenuItem onCick={handleClose} component={Link} to='/mycart'>Cart</MenuItem>
+                    <MenuItem onClick={handleClose} component={Link} to='/mycart'>Cart</MenuItem>
                     : null
                     }
                     { isAuthenticated() ?

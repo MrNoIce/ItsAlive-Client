@@ -103,12 +103,11 @@ const Product = props => {
                         <CardActions disableSpacing>
                             {isAuthenticated() ?
                                 <Button
-                                color="primary"
-                                size='small'
                                 onClick={() => {
                                     addToOrder(props.product);
-                                    handleOrderClick(transitionDown);}}
-                                >
+                                    handleOrderClick(transitionDown);
+                                }}
+                                color="primary" size='small'>
                                     Order
                                 </Button>
                             : null
