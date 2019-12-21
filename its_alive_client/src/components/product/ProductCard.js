@@ -54,7 +54,7 @@ const Product = props => {
     const [transition, setTransition] = React.useState(undefined);
 
 
-    const handleOrderClick = transition => () => {
+    const handleOrderClick = transition => {
         setTransition(() => transition);
         setOpen(true);
     }
@@ -82,7 +82,6 @@ const Product = props => {
         .then(() => {
             props.history.push("/")
         })
-        handleOrderClick(transitionDown)
     }
 
     const totalAvailable = props.product.quantity - props.product.total_sold
@@ -103,7 +102,11 @@ const Product = props => {
                         </CardContent>
                         <CardActions disableSpacing>
                             {isAuthenticated() ?
-                                <Button onClick={() => addToOrder(props.product)}
+                                <Button
+                                onClick={() => {
+                                    addToOrder(props.product);
+                                    handleOrderClick(transitionDown);
+                                }}
                                 color="primary" size='small'>
                                     Order
                                 </Button>
