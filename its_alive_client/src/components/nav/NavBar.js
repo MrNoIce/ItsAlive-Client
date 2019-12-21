@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
     title: {
       flexGrow: 1,
     },
+    menuButton: {
+        // float: "left",
+    }
   }));
 
 const NavBar = props => {
@@ -60,9 +63,8 @@ const NavBar = props => {
                 /></div> */}
         <div className={classes.root}>
 
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <IconButton className={classes.menuButton} color="inherit" aria-label="menu">
                 <MenuIcon
-                    edge="start"
                     className={classes.menuButton}
                     color="inherit"
                     aria-label="open drawer"

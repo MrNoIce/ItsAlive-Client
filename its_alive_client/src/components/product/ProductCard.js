@@ -22,15 +22,7 @@ import Fade from "@material-ui/core/Fade";
 
 
 const useStyles = makeStyles(theme => ({
-    container: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(12, 1fr)',
-        gridGap: theme.spacing(3),
-        spacing: "auto",
-        },
-    card: {
-        maxWidth: 200,
-    },
+
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
@@ -94,7 +86,7 @@ const Product = props => {
 
     const totalAvailable = props.product.quantity - props.product.total_sold
     return (
-            <Grid spacing={3} justifyContent="space-around">
+        <div className="card">
                 <Card className={classes.card} key={props.product.id}>
                         <CardMedia
                             className={classes.media}
@@ -156,7 +148,7 @@ const Product = props => {
                 }}
                 message={<span id="message-id">"Product added to cart"</span>}
             />
-        </Grid>
+        </div>
     )
 }
 

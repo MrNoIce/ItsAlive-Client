@@ -22,15 +22,13 @@ const ProductList = props => {
 
     return (
         <>
-            <article className="productList">
-                <Grid container justify="center" spacing={1} style={{ width:'100%', display: 'inline-flex', justifyContent: 'space-around' }}>
-                    {
-                        products.map(product =>
-                            <ProductCard key={product.id}
-                        product={product} {...props} />)
-                    }
-                </Grid>
-            </article>
+            <div className="productList">
+                {
+                    products.map(product =>
+                        <ProductCard key={product.id}
+                    product={product} {...props} />)
+                }
+            </div>
         </>
     )
 }
