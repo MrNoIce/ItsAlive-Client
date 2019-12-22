@@ -54,6 +54,10 @@ const Product = props => {
     const [transition, setTransition] = React.useState(undefined);
 
 
+    const handleOrderClick = transition => {
+        setTransition(() => transition);
+        setOpen(true);
+    }
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -63,10 +67,6 @@ const Product = props => {
     }
 
 
-    const handleOrderClick = transition => {
-        setTransition(() => transition);
-        setOpen(true);
-    }
 
     const addToOrder = (newOrder) => {
         fetch(`http://localhost:8000/orders`, {
@@ -124,8 +124,7 @@ const Product = props => {
                                 <ExpandMoreIcon />
                             </IconButton>
                         </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <Fade in={expanded} timeout="auto" unmountOnExit>
+                    <Collapse in={expanded} timeout={500} unmountOnExit>
                             <ClickAwayListener onClickAway={handleExpandClick}>
                                 <CardContent>
                                     <Typography paragraph>
@@ -134,7 +133,6 @@ const Product = props => {
                                     </Typography>
                                 </CardContent>
                             </ClickAwayListener>
-                        </Fade>
                     </Collapse>
                 </Card>
             <Snackbar
