@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper"
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input'
 import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
 
 
@@ -120,6 +121,10 @@ const MyCart = props => {
     getPaymentTypes();
   }, []);
 
+  const totalInCart = products.map(item => {
+    return(item.id+ 1)
+  });
+
   return (
     <>
       <main className="order-items">
@@ -137,6 +142,9 @@ const MyCart = props => {
                   <RemoveShoppingCartIcon />
                 </Button>
                 {item.name}: {item.price}
+                <Button color='primary' size='small'>+</Button>
+                <Button color='primary' size="small">-</Button>
+          <Input value={totalInCart} size="small"></Input>
               </Paper>
             );
           })}
