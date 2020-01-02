@@ -121,9 +121,15 @@ const MyCart = props => {
     getPaymentTypes();
   }, []);
 
+  let loopCounter = 0
+  let itemToCompare = ''
   const totalInCart = products.map(item => {
-    return(item.id+ 1)
+    console.log("loopCounter",loopCounter,"item is",item)
+    loopCounter += 1
+    return(item.id+=1)
   });
+  console.log("totalinCart",totalInCart)
+
 
   return (
     <>
@@ -142,9 +148,11 @@ const MyCart = props => {
                   <RemoveShoppingCartIcon />
                 </Button>
                 {item.name}: {item.price}
-                <Button color='primary' size='small'>+</Button>
-                <Button color='primary' size="small">-</Button>
-          <Input value={totalInCart} size="small"></Input>
+                <button color='primary' size='small'>+</button>
+                <button color='primary' size="small">-</button>
+                <input value={totalInCart} size="small" type='number'
+                   onChange={()=>{this._handleChangeEvent(this.state.data);}}
+                   defaultValue={this.state.data}/>
               </Paper>
             );
           })}
